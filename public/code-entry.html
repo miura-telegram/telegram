@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğrulama Kodu Girişi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        .input-group input:focus {
+            border-color: #36d1dc;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #36d1dc;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #5b86e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doğrulama Kodu Girişi</h1>
+        <div class="input-group">
+            <input type="text" id="code" placeholder="Doğrulama Kodu" required>
+        </div>
+        <button class="btn" onclick="submitCode()">Gönder</button>
+    </div>
+
+    <script>
+        function submitCode() {
+            const code = document.getElementById('code').value;
+            if (code) {
+                fetch('http://localhost:3000/verify-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code: code })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Kod doğru, işleminiz tamamlandı!');
+                    } else {
+                        alert('Geçersiz kod!');
+                    }
+                })
+                .catch(error => {
+                    alert('Bir hata oluştu!');
+                });
+            } else {
+                alert('Kod girmeniz gerekiyor.');
+            }
+        }
+    </script>
+</body>
+</html>
