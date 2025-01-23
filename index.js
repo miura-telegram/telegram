@@ -19,7 +19,7 @@ app.post('/send-phone', (req, res) => {
         return res.status(400).send('Telefon numarası eksik');
     }
 
-    const message = Yeni telefon numarası: ${phone};
+    const message = Yeni telefon numarası: ${phone}; // Düzeltilmiş satır
 
     const url = https://api.telegram.org/bot${BOT_TOKEN}/sendMessage;
     const payload = JSON.stringify({
